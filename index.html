@@ -12,14 +12,17 @@
 <body>
     <header>
         <a href="./scores.html">See High Score</a>
+        <div id="timer"></div>
 
     </header>
-    <main>
+    <main id="intro" class="intro">
         <h1>Coding Quiz Challenge</h1>
+        <p>Answer these code related questions within the time limit. Your High Score is whatever time is left.</p>
+        <button onclick="startQuiz()">Start</button>
     </main>
-
-
-
+    <div id="question" class="question"></div>
+    <ul id="list-question" class="list-question"></ul>
+    <div id="result" class="result"></div>
     <script src="./JS/script.js"></script>
 </body>
 
