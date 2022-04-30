@@ -1,4 +1,4 @@
-var startTime = 60;
+
 var questions = [
     {
         question: "Commonly used data types do not include?",
@@ -28,15 +28,27 @@ var questions = [
 
 var introductionsEl = document.querySelector("#intro");
 var questionEl = document.querySelector("#question");
-questionIndex = 0;
 var optionsEl = document.querySelector("#list-question");
 var resultEl = document.querySelector("#result");
 var timerEl = document.querySelector("#timer");
-var time = 50;
+var startTime = 60;
+var intervalId;
+var correctCount = 0;
+var questionIndex = 0;
+
+function timeUpdate() {
+    startTime--;
+    timerEl.textContent = "Time remaining " + startTime;
+    if (time <= 0) {
+        endQuiz();
+    }
+}
+
 function addQuestion() {
     intervalId = setInterval(timeUpdate, 1000);
     questionEl.textContent = questions[questionIndex].question;
     optionsEl.innerHTML = "";
+    resultEl.innerHTML = "";
     var choices = questions[questionIndex].choices;
     var choicesLength = choices.length;
 
@@ -50,12 +62,32 @@ function addQuestion() {
         optionsEl.append(questionListItem);
     }
 };
-function timeUpdate() {
-    time--;
-    timerEl.textContent = "Time remaining " + time;
+
+function nextQuestion() {
+    questionIndex++;
+    if (questionIndex === questions.length) {
+        startTime = 0;
+    }
+    addQuestion();
 }
+
+function correctAnswer()
+if (event.target.matches("button")) {
+    var answer = event.target.textContent;
+    if (answer === questions[questionIndex].answer) {
+        resultEl.textContent = "Correct";
+        correctCount++;
+    } else {
+        resultEl.textContent = "Incorrect";
+        startTime = startTime - 5;
+        timerEl.textContent = startTime;
+    }
+}
+
+
+
 var startQuiz = function () {
     introductionsEl.remove();
     addQuestion();
-
+    optionsEl.addEventListener("click", correctAnswer);
 };
