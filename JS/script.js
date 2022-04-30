@@ -36,10 +36,14 @@ var intervalId;
 var correctCount = 0;
 var questionIndex = 0;
 
+function endQuiz() {
+
+}
+
 function timeUpdate() {
     startTime--;
     timerEl.textContent = "Time remaining " + startTime;
-    if (time <= 0) {
+    if (startTime <= 0) {
         endQuiz();
     }
 }
@@ -71,7 +75,7 @@ function nextQuestion() {
     addQuestion();
 }
 
-function correctAnswer()
+function correctAnswer(event)
 if (event.target.matches("button")) {
     var answer = event.target.textContent;
     if (answer === questions[questionIndex].answer) {
