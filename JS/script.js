@@ -26,18 +26,19 @@ var questions = [
         answer: "Console.log",
     },];
 
-
-var startQuiz = function () {
-    var x = setInterval(function () {
-        startTime--;
-        document.querySelector("#timer").textContent = "Timer " + startTime;
-    }, 1000);
-    document.querySelector("#question").textContent = questions[0].question;
-    var taskLi = $("<li>")
-    for (let i = 0; i < questions[0].choices.length; i++) {
-        text += "<li>" + questions[0].choices[i] + "</li>"
-        querySelector("#list-question").appendChild(text);
-    }
-
+var introductionsEl = document.querySelector("#intro")
+var questionEl = document.querySelector("#question")
+questionIndex = 0;
+var optionsEl = document.querySelector("#list-question")
+var resultEl = document.querySelector("#result")
+function addQuestion(){
+    questionEl.textContent = questions[questionIndex].question;
+    optionsEl.innerHTML = "";
+    var choices = questions[questionIndex].choices;
+    var choicesLength = choices.length;
 }
+var startQuiz = function () {
+    introductionsEl.remove();
+    addQuestion();
 
+};
