@@ -26,16 +26,33 @@ var questions = [
         answer: "Console.log",
     },];
 
-var introductionsEl = document.querySelector("#intro")
-var questionEl = document.querySelector("#question")
+var introductionsEl = document.querySelector("#intro");
+var questionEl = document.querySelector("#question");
 questionIndex = 0;
-var optionsEl = document.querySelector("#list-question")
-var resultEl = document.querySelector("#result")
-function addQuestion(){
+var optionsEl = document.querySelector("#list-question");
+var resultEl = document.querySelector("#result");
+var timerEl = document.querySelector("#timer");
+var time = 50;
+function addQuestion() {
+    intervalId = setInterval(timeUpdate, 1000);
     questionEl.textContent = questions[questionIndex].question;
     optionsEl.innerHTML = "";
     var choices = questions[questionIndex].choices;
     var choicesLength = choices.length;
+
+    for (var i = 0; i < choicesLength; i++) {
+        var questionListItem = document.createElement("li");
+        questionListItem.className = "question-choices";
+        var questionButton = document.createElement("button");
+        questionButton.className = "choices";
+        questionButton.textContent = choices[i];
+        questionListItem.append(questionButton);
+        optionsEl.append(questionListItem);
+    }
+};
+function timeUpdate() {
+    time--;
+    timerEl.textContent = "Time remaining " + time;
 }
 var startQuiz = function () {
     introductionsEl.remove();
