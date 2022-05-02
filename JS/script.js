@@ -75,18 +75,21 @@ function nextQuestion() {
     addQuestion();
 }
 
-function correctAnswer(event)
-if (event.target.matches("button")) {
-    var answer = event.target.textContent;
-    if (answer === questions[questionIndex].answer) {
-        resultEl.textContent = "Correct";
-        correctCount++;
-    } else {
-        resultEl.textContent = "Incorrect";
-        startTime = startTime - 5;
-        timerEl.textContent = startTime;
+function correctAnswer(event) {
+    clearInterval(intervalId);
+    if (event.target.matches("button")) {
+        var answer = event.target.textContent;
+        if (answer === questions[questionIndex].answer) {
+            resultEl.textContent = "Correct";
+            correctCount++;
+        } else {
+            resultEl.textContent = "Incorrect";
+            startTime = startTime - 8;
+            timerEl.textContent = startTime;
+        }
     }
-}
+    nextQuestion();
+};
 
 
 
