@@ -37,7 +37,7 @@ var correctCount = 0;
 var questionIndex = 0;
 
 function endQuiz() {
-
+    window.location = "./scores.html";
 }
 
 function timeUpdate() {
